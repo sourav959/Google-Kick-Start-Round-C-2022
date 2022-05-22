@@ -8,23 +8,20 @@ class Solution{
         long sum=0;
         for(int i=1;i<=n;i++)
             sum+=i;
-        for(int i=1;i<=Math.pow(2,n)-1;i++){
-            ans=new ArrayList<>();
-            String bin=Integer.toBinaryString(i);
-            alan=0;
-            bar=0;
-            int extra=n;
-            for(int j=bin.length()-1;j>=0;j--){
-                if(bin.charAt(j)=='1'){
-                    alan+=extra;
-                    ans.add(extra);
+        long i=1;
+        while(alan+bar<sum){
+            alan=i*x;
+            bar=i*y;
+            i++;
+        }
+        if(alan+bar==sum){
+            for(int j=n;j>=1 && alan>0;j--){
+                if(j<=alan){
+                    ans.add(j);
+                    alan-=j;
                 }
-                extra--;
             }
-            bar=sum-alan;
-            double r2=(double) alan/bar;
-            if(r1==r2)
-                return ans;
+            return ans;
         }
         return null;
     }
